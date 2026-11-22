@@ -103,7 +103,14 @@ class PostgresStore:
                     """INSERT INTO run_files (run_id, filename, status, additions, deletions, patch)
                        VALUES (%s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING""",
                     [
-                        (run.run_id, f.filename, f.status, f.additions, f.deletions, f.patch)
+                        (
+                            run.run_id,
+                            f.filename,
+                            f.status,
+                            f.additions,
+                            f.deletions,
+                            f.patch,
+                        )
                         for f in files
                     ],
                 )

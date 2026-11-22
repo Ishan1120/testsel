@@ -1,36 +1,38 @@
-# Contributing to Testsel
+# Contributing to testsel
 
-Thank you for contributing to Testsel. This guide outlines branch naming, commit conventions, PR guidelines, and testing requirements for the team.
+Welcome to the `testsel` project! We use a collaborative workflow built around clear ownership, automated quality gates, and structured commit history.
 
-## Branch Naming
-All branches must follow one of these prefixes:
-- `feat/`: New features, capabilities, or pipeline additions (e.g., `feat/junit-retry-parser`, `feat/lightgbm-training`)
-- `fix/`: Bug fixes and error handling corrections (e.g., `fix/github-rate-limit-backoff`)
-- `docs/`: Documentation, ADRs, or architectural guides (e.g., `docs/adr-dataset-storage`)
-- `chore/`: Tooling updates, dependency bumps, or repo maintenance (e.g., `chore/pre-commit-upgrade`)
+## Branch Naming Conventions
+Always create descriptive branch names prefixed with the category of change:
+- `feat/<description>`: New functionality (e.g., `feat/collector-retry-logic`)
+- `fix/<description>`: Bug fixes (e.g., `fix/junit-duration-parsing`)
+- `docs/<description>`: Documentation changes (e.g., `docs/update-adr`)
+- `chore/<description>`: Maintenance, tool upgrades, dependency bumps (e.g., `chore/bump-psycopg`)
 
-## Commit Conventions
-We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
-- Format: `<type>(<scope>): <short description>`
-- Allowed types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`
-- Scope: Module or area modified (e.g., `collector`, `shared`, `ci`, `store`, `evaluation`)
-- Examples:
-  - `feat(collector): support multi-token rotation for GitHub client`
-  - `fix(store): resolve schema path resolution in monorepo layout`
-  - `test(junit): add XML entity injection bomb rejection test`
+## Conventional Commits
+All commit messages must adhere to the [Conventional Commits](https://www.conventionalcommits.org/) specification:
+```text
+<type>[optional scope]: <description>
 
-## Pull Request Rules
-1. **Size Limit**: Keep PRs focused and under approximately 400 lines of changed code whenever feasible.
-2. **Review Process**: The other developer must review and approve the PR before merging (see `.github/CODEOWNERS`).
-3. **Merge Method**: Use **Squash and Merge** to maintain a linear and scannable Git history on `main`.
-4. **Clean CI**: All CI checks (`test` job running linter, formatter, and pytest) must pass green before merging.
-5. **Secrets Hygiene**: Never commit `.env` files, production credentials, or personal access tokens.
+[optional body]
 
-## Testing Rules
-- Every feature or bug fix must include accompanying unit tests under `tests/unit/`.
-- Integration tests requiring live PostgreSQL or network services belong in `tests/integration/` and must be marked with `@pytest.mark.integration`.
-- Run verification locally before submitting PRs:
+[optional footer(s)]
+```
+Types include: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`.
+
+## Pull Request Guidelines
+- **Scope & Size**: Keep PRs focused, ideally under ~400 lines of changes. Smaller PRs are easier to review and merge quickly.
+- **Review Requirement**: The other developer must review and approve before merging.
+- **Merge Strategy**: Use **Squash and Merge** to maintain a clean linear history on `main`.
+- **Progress Tracking**: Update [docs/PROGRESS.md](docs/PROGRESS.md) in every PR that completes or starts a task.
+- **Pre-flight Checks**: Before opening or requesting review on a PR, run:
   ```bash
   make lint
   make test
   ```
+  Ensure all automated GitHub Actions checks pass.
+
+## Testing Guidelines
+- Add unit tests under `tests/unit/` for all new core logic.
+- Place integration tests requiring a live PostgreSQL instance under `tests/integration/` and mark them with `@pytest.mark.integration`.
+- All tests must pass cleanly without network flakiness.
