@@ -1,0 +1,21 @@
+# Global fallback reviewers
+* @person-a @person-b
+
+# Person A: data collection, evaluation, feature engineering, model training
+/src/testsel/collector/   @person-a
+/src/testsel/features/    @person-a
+/src/testsel/evaluation/  @person-a
+/src/testsel/training/    @person-a
+
+# Person B: serving, API, worker, frontend, infrastructure, CI workflows
+/src/testsel/serving/     @person-b
+/src/testsel/api/         @person-b
+/src/testsel/worker/      @person-b
+/web/                     @person-b
+/infra/                   @person-b
+/.github/                 @person-b
+
+# Shared ownership: shared domain models, database schema, configs
+/src/testsel/shared/      @person-a @person-b
+/db/                      @person-a @person-b
+/configs/                 @person-a @person-b

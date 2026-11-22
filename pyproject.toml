@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "testsel"
+version = "0.1.0"
+description = "Predictive test selection for CI: data collection, training, serving"
+requires-python = ">=3.12"
+dependencies = [
+    "requests>=2.31",
+    "psycopg[binary]>=3.1",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "ruff>=0.5",
+    "pre-commit>=3.5",
+]
+
+[project.scripts]
+testsel = "testsel.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+markers = [
+    "integration: marks tests as integration tests (deselect with '-m \"not integration\"')",
+]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+extend-exclude = ["_existing"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]

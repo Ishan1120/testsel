@@ -1,0 +1,33 @@
+# Environment files and credentials
+.env
+*.env
+
+# Local data and cache directories
+data/
+_existing/
+
+# Python virtual environments
+.venv/
+venv/
+ENV/
+
+# Python bytecode and build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Tool and test caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Node / frontend dependencies (future web dashboard)
+node_modules/
+
+# OS specific files
+.DS_Store
+Thumbs.db

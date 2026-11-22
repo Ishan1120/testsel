@@ -1,0 +1,14 @@
+# Repositories to collect. Start with 3-5 that you have verified, then grow to 20-50.
+# Verify before adding: tests run on GitHub Actions AND upload a JUnit XML artifact
+# (pytest --junitxml=..., Maven surefire-reports, jest-junit, etc).
+defaults:
+  since: "2025-06-01"          # only runs created on/after this date
+  max_runs: 500                # per repo, per invocation
+  # artifact names that look like test reports (case-insensitive regex)
+  artifact_pattern: "(junit|test[-_ ]?results?|pytest|test[-_ ]?report|surefire)"
+
+repos:
+  # - name: owner/repo
+  #   since: "2025-01-01"
+  #   artifact_pattern: "^my-report$"
+  - name: your-org/your-repo   # replace with a real repository
